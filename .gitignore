@@ -1,0 +1,7 @@
+/build
+/vendor
+.DS_STORE
+composer.lock
+phpunit.xml
+!.gitkeep
+*.log
