@@ -1,12 +1,12 @@
 {
     "name": "cwalspace/maxcacher",
-    "type": "package",
+    "type": "library",
     "description": "timebound string cache: redis, files, memory.",
     "keywords": ["php","cache","files","redis"],
     "homepage": "https://github.com/cwalspace/maxcacher",
     "authors": [
         {
-            "name": "Por Corp",
+            "name": "PC",
             "homepage": "https://github.com/cwalspace/maxcacher"
         }
     ],
