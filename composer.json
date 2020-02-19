@@ -1,27 +1,29 @@
 {
     "name": "cwalspace/maxcacher",
-    "type": "library",
+    "type": "project",
     "description": "timebound string cache: redis, files, memory.",
     "keywords": ["php","cache","files","redis"],
     "homepage": "https://github.com/cwalspace/maxcacher",
+    "license": "MIT",
     "authors": [
         {
             "name": "PC",
             "homepage": "https://github.com/cwalspace/maxcacher"
         }
     ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.1",
+        "predis/predis": ">=1.0"
+
+    },
+    "require-dev": {
+        "phpunit/phpunit": "6.*"
+    },
     "autoload": {
         "psr-4": {
-            "cwalspace\\MaxCacher\\": "src/",
-            "Tests\\": "tests/"
+            "cwalspace\\MaxCacher\\": "src/"
         }
-     },
-    "minimum-stability": "dev",
-    "require-dev": {
-        "phpunit/phpunit": ">=9.0"
-    },
-    "require": {
-        "php": ">=7.3.0",
-        "predis/predis": ">=1.0"
     }
 }
