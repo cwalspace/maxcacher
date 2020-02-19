@@ -17,8 +17,7 @@ class RuntimeTest extends TestCase
             'default_ttl'   => 60 * 60 * 12
         ];
 
-        $this->config = new \cwalspace\MaxCacher\Config($file);
-
+        $this->config = new \cwalspace\MaxCacher\Config($runtime);
         $this->adapter = new \cwalspace\MaxCacher\MaxCacher($this->config);
     }
 

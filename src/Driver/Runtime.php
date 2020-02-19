@@ -14,12 +14,12 @@ class Runtime
 
     public function set($key, $value, $ttl = null)
     {
-        if ($ttl < time()) {
-            throw new Exception("error: past TTL");
-        }
-
         if ($ttl === null) {
             $ttl = time() + $this->config->default_ttl;
+        }
+
+        if ($ttl <= time()) {
+            throw new \Exception("error: past TTL");
         }
 
         $this->map[md5($key)] = ['val' => $value, 'ttl' => $ttl];
