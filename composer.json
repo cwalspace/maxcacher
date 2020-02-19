@@ -12,10 +12,10 @@
     ],
     "autoload": {
         "psr-4": {
-            "MaxCacher\\": "src/",
+            "cwalspace\\MaxCacher\\": "src/",
             "Tests\\": "tests/"
         }
-    },
+     },
     "minimum-stability": "dev",
     "require-dev": {
         "phpunit/phpunit": ">=9.0"
