@@ -2,8 +2,6 @@
 namespace cwalspace\MaxCacher;
 
 use cwalspace\MaxCacher\Config;
-use cwalspace\MaxCacher\Driver\File;
-
 
 class MaxCacher
 {
@@ -15,7 +13,7 @@ class MaxCacher
     {
         $this->config = $config;
 
-        $driver_class = '\cwalspace\MaxCacher\Driver\\' . ucfirst($config->driver);
+        $driver_class = '\\cwalspace\\MaxCacher\\Driver\\' . ucfirst($config->driver);
         $this->driver = new $driver_class($config);
     }
     
@@ -23,6 +21,7 @@ class MaxCacher
     {
         return $this->driver->set($key, $value, $ttl);
     }
+
     
     public function get($key)
     {
