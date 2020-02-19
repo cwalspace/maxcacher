@@ -1,25 +1,16 @@
-<?php
+<?php 
 
-namespace Tests;
+namespace Tests\Driver;
 
 use PHPUnit\Framework\TestCase;
 
-use cwalspace\MaxCacher\Config;
-use cwalspace\MaxCacher\MaxCacher;
-
-class MaxCacherTest extends TestCase
+class RedisTest extends TestCase
 {
     protected $adapter;
     protected $config;
 
     public function setUp(): void
     {
-        $file = [
-            'driver'        => 'file', 
-            'path'          => __DIR__ .'/../', 
-            'default_ttl'   => 60 * 60 * 12
-        ];
-
         $redis = [
             'driver'        => 'redis', 
             'path'          => __DIR__ .'/../', 
@@ -28,32 +19,26 @@ class MaxCacherTest extends TestCase
             'redis_prefix'  => 'mc'
         ];
 
-        $runtime = [
-            'driver'        => 'runtime',
-            'path'          => __DIR__ .'/../', 
-            'default_ttl'   => 60 * 60 * 12
-        ];
+        $this->config = new \cwalspace\MaxCacher\Config($redis);
 
-        $this->config = new Config($runtime);
-
-        $this->adapter = new MaxCacher($this->config);
+        $this->adapter = new \cwalspace\MaxCacher\MaxCacher($this->config);
     }
 
-    public function testSet()
+    public function testFileSet()
     {
         $value = microtime();
         $this->adapter->set('set', $value);
         $this->assertEquals($value, $this->adapter->get('set'));
     }
 
-    public function testDue()
+    public function testFileDue()
     {
         $value = microtime();
         $this->adapter->set('exp', $value, time());
         $this->assertNull($this->adapter->get('exp'));
     }
 
-    public function testDel()
+    public function testFileDel()
     {
         $value = microtime();
         $this->adapter->set('del', $value);
