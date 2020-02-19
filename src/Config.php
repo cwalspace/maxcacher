@@ -11,12 +11,12 @@ class Config
         $this->config = $config;
     }
 
-    public function __set($key, $value = null)
+    public function set($key, $value = null)
     {
         $this->config[$key] = $value;
     }
 
-    public function __get($key)
+    public function get($key)
     {
         return isset($this->config[$key]) ? $this->config[$key] : null;
     }

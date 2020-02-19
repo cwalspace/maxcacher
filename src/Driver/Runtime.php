@@ -15,7 +15,7 @@ class Runtime
     public function set($key, $value, $ttl = null)
     {
         if ($ttl === null) {
-            $ttl = time() + $this->config->default_ttl;
+            $ttl = time() + $this->config->get('default_ttl');
         }
 
         if ($ttl <= time()) {
