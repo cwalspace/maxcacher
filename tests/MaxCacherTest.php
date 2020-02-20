@@ -4,9 +4,6 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 
-use cwalspace\MaxCacher\Config;
-use cwalspace\MaxCacher\MaxCacher;
-
 class MaxCacherTest extends TestCase
 {
     protected $adapter;
@@ -17,7 +14,8 @@ class MaxCacherTest extends TestCase
         $file = [
             'driver'        => 'file', 
             'path'          => __DIR__ .'/../', 
-            'default_ttl'   => 60 * 60 * 12
+            'default_ttl'   => 60 * 60 * 12,
+            'prefix'        => 'rs'
         ];
 
         $redis = [
@@ -25,18 +23,18 @@ class MaxCacherTest extends TestCase
             'path'          => __DIR__ .'/../', 
             'default_ttl'   => 60 * 60 * 12,
             'redis'         => '127.0.0.1:6379',
-            'redis_prefix'  => 'mc'
+            'prefix'        => 'rs'
         ];
 
         $runtime = [
             'driver'        => 'runtime',
             'path'          => __DIR__ .'/../', 
-            'default_ttl'   => 60 * 60 * 12
+            'default_ttl'   => 60 * 60 * 12,
+            'prefix'        => 'rs'
         ];
 
-        $this->config = new Config($runtime);
-
-        $this->adapter = new MaxCacher($this->config);
+        $this->config = new \cwalspace\MaxCacher\Config($runtime);
+        $this->adapter = new \cwalspace\MaxCacher\MaxCacher($this->config);
     }
 
     public function testSet()
