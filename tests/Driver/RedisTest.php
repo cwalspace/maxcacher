@@ -16,11 +16,10 @@ class RedisTest extends TestCase
             'path'          => __DIR__ .'/../', 
             'default_ttl'   => 60 * 60 * 12,
             'redis'         => '127.0.0.1:6379',
-            'redis_prefix'  => 'mc'
+            'prefix'        => 'rs'
         ];
 
         $this->config = new \cwalspace\MaxCacher\Config($redis);
-
         $this->adapter = new \cwalspace\MaxCacher\MaxCacher($this->config);
     }
 

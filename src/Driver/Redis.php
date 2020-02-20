@@ -2,35 +2,36 @@
 
 namespace cwalspace\MaxCacher\Driver;
 
-use cwalspace\MaxCacher\Config;
-
 class Redis
 {
     protected $config;
     protected $redis;
 
-    public function __construct(Config $config)
+    public function __construct(\cwalspace\MaxCacher\Config $config)
     {
         $this->config = $config;
-        $this->redis = new \Predis\Client($config->redis, ['prefix' => $config->redis_prefix .'.']);
+        $this->redis = new \Predis\Client($config->get('redis'), ['prefix' => $config->getPrefix() .':']);
     }
 
-    public function set($key, $value, $ttl)
+    public function set($key, $value, $ttl = null)
     {
-        if ($ttl === null) {
-            $ttl = $this->config->default_ttl;
-        } else {
-            $ttl -= time();
-        }
+        $hash = md5($key);
 
-        $this->redis->pipeline(function($pipe) use ($key, $value, $ttl) {
-            $pipe->set(md5($key), $value);
-            $pipe->expire(md5($key), $ttl);
+        $ttl += (($ttl === null) ? $this->config->getDefaultTtl() : -time());
+
+        return $this->redis->pipeline(function($pipe) use ($hash, $value, $ttl) {
+            $pipe->set($hash, $value);
+            $pipe->expire($hash, $ttl);
         });
     }
 
     public function get($key)
     {
         return $this->redis->get(md5($key)) ?: null;
+    }
+
+    public function del($key)
+    {
+        return $this->redis->del(md5($key));
     }
 }
