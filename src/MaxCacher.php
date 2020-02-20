@@ -26,7 +26,7 @@ class MaxCacher implements \cwalspace\MaxCacher\iCommon
 
     public function del($key)
     {
-        return $this->driver->del($key, null, time());
+        return $this->driver->del($key);
     }
 }
 ?>
