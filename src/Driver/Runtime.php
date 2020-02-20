@@ -14,15 +14,16 @@ class Runtime
 
     public function set($key, $value, $ttl = null)
     {
+        $hash = md5($key);
+
         if ($ttl === null) {
-            $ttl = time() + $this->config->get('default_ttl');
+            $ttl = time() + $this->config->getDefaultTtl();
+        } else if ($ttl <= time()) {
+            return false;
         }
 
-        if ($ttl <= time()) {
-            throw new \Exception("error: past TTL");
-        }
+        $this->map[$hash] = ['val' => $value, 'ttl' => $ttl];
 
-        $this->map[md5($key)] = ['val' => $value, 'ttl' => $ttl];
         return true;
     }
 
@@ -32,13 +33,12 @@ class Runtime
 
         if (!isset($this->map[$hash])) {
             return null;
-        }
-
-        if (time() < $this->map[$hash]['ttl']) {
+        } else if (time() < $this->map[$hash]['ttl']) {
             return $this->map[$hash]['val'];
         }
 
         unset($this->map[$hash]);
+
         return null;
     }
 
@@ -51,6 +51,6 @@ class Runtime
             return true;
         } 
 
-        throw new Exception('error: key was not found');
+        return false;
     }
 }

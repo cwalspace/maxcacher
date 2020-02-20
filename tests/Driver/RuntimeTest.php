@@ -14,7 +14,8 @@ class RuntimeTest extends TestCase
         $runtime = [
             'driver'        => 'runtime',
             'path'          => __DIR__ .'/../', 
-            'default_ttl'   => 60 * 60 * 12
+            'default_ttl'   => 60 * 60 * 12,
+            'prefix'        => 'rs'
         ];
 
         $this->config = new \cwalspace\MaxCacher\Config($runtime);
