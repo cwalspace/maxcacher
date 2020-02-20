@@ -26,7 +26,7 @@ class MaxCacher
 
     public function del($key)
     {
-        return $this->driver->set($key, null, time());
+        return $this->driver->del($key, null, time());
     }
 }
 ?>
