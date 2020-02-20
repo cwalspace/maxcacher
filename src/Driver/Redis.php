@@ -2,7 +2,7 @@
 
 namespace cwalspace\MaxCacher\Driver;
 
-class Redis
+class Redis implements \cwalspace\MaxCacher\iCommon
 {
     protected $config;
     protected $redis;

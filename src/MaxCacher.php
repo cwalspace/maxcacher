@@ -1,7 +1,7 @@
 <?php 
 namespace cwalspace\MaxCacher;
 
-class MaxCacher
+class MaxCacher implements \cwalspace\MaxCacher\iCommon
 {
     protected $driver;
     protected $config;

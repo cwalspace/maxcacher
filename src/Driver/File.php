@@ -4,7 +4,7 @@ namespace cwalspace\MaxCacher\Driver;
 
 define('DS', DIRECTORY_SEPARATOR);
 
-class File
+class File implements \cwalspace\MaxCacher\iCommon
 {
     protected   $config;
     private     $path;

@@ -2,7 +2,7 @@
 
 namespace cwalspace\MaxCacher\Driver;
 
-class Runtime
+class Runtime implements \cwalspace\MaxCacher\iCommon
 {
     protected $config;
     private $map;
