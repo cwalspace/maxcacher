@@ -70,13 +70,14 @@ class File
         }
 
         if (flock($fh, LOCK_EX)) {
-            $ret = @fwrite($fh, serialize([$ttl, $data]));
+            $ret = fwrite($fh, serialize([$ttl, $data]));
             flock($fh, LOCK_UN);
-            fclose($fh);
         } else {
+            fclose($fh);
             throw new \Exception('access error: couldn\'t obtain exclusive lock / '. $fullPath);
         }
 
+        fclose($fh);
 
         return $ret;
     }
@@ -94,7 +95,7 @@ class File
         }
 
         flock($fh, LOCK_SH);
-        $tmp = @unserialize(@fread($fh, @filesize($fullPath)));
+        $tmp = @unserialize(fread($fh, filesize($fullPath)));
         flock($fh, LOCK_UN);
         fclose($fh);
 
